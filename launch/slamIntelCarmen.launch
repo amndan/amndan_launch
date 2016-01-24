@@ -1,0 +1,11 @@
+<launch>
+
+  <include file="$(find amndan_launch)/launch/tsdIcpIntelCarmen.launch"/>
+  
+  <node pkg="carmen_publisher" type="carmenConverter" name="carmenConverter"/>
+
+  <node pkg="carmen_publisher" type="carmen_publisher" name="carmenPublisher" args="$(find carmen_publisher)/bags/slamBenchmarking/intel_.clf"/>
+
+  <node pkg="rviz" type="rviz" name="rviz"/>
+
+</launch>
