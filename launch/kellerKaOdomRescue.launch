@@ -4,16 +4,20 @@
 
     <param name="use_sim_time" value="true" />
 
-    <node pkg="rosbag" type="play" name="player" args="--clock -r 1.0 /media/amndan/Daten/kellerKA/1970-01-01-02-00-04.bag" />
+    <node pkg="rosbag" type="play" name="player" args=" --clock -s 35.0 -r 1 /tf:=/tf_old /media/amndan/Daten/kellerKA/1970-01-01-02-00-04.bag" />
+    
+    <node pkg="tf" type="tf_remap" name="tfRemapper" args="_mappings:='[{old: /map, new: /map_old}]'" />
 
     <node pkg="tf" type="static_transform_publisher" name="tfMapOdom" args="0 0 0 0 0 0 map odom 20" />
+    
+    <node pkg="tf" type="static_transform_publisher" name="tfStaticLaser" args="-0.14 0.14 0 -0.78 0 0  laser_new base_footprint_slam_new 100" />
 
     <node pkg="rviz" type="rviz" name="rviz" />
 
     <node pkg="ohm_bob_laser_filter" type="bob_laser_filter" name="bob_laser_filter" output="screen">
         <param name="laser_input_topic" type="string" value="/r2000_driver_node/scan" />
         <param name="laser_output_topic" type="string" value="filtered_scan" />
-        <param name="laser_tf_frame" type="string" value="laser" />
+        <param name="laser_tf_frame" type="string" value="laser_new" />
         <param name="min_angle" type="double" value="-3.14" />
         <param name="max_angle" type="double" value="1.57" />
         <param name="mirror" type="bool" value="false" />
@@ -21,35 +25,35 @@
     </node>
 
     <include file="$(find amndan_launch)/launch/slam.launch">
-        <arg name="x_offset" value="0.0" />
-        <arg name="y_offset" value="20.0" />
+        <arg name="x_offset" value="-50.0" />
+        <arg name="y_offset" value="50.0" />
         <arg name="yaw_offset" value="0.0" />
 
         <arg name="map_size" value="12" />
-        <arg name="cellsize" value="0.030" />
-        <arg name="truncation_radius" value="8" />
+        <arg name="cellsize" value="0.060" />
+        <arg name="truncation_radius" value="5" />
 
         <arg name="min_range" value="0.0" />
-        <arg name="max_range" value="30.0" />
+        <arg name="max_range" value="40.0" />
 
-        <arg name="object_inflation_factor" value="1" />
+        <arg name="object_inflation_factor" value="2" />
 
         <arg name="registration_mode" value="3" />
         <arg name="icp_iterations" value="30" />
 
-        <arg name="reg_trs_max" value="0.5" />
+        <arg name="reg_trs_max" value="5.0" />
         <arg name="reg_sin_rot_max" value="600.0" />
 
         <arg name="trials" value="30" />
-        <arg name="sizeControlSet" value="180" />
+        <arg name="sizeControlSet" value="360" />
 
-        <arg name="max_velocity_rot" value="6.28" />
-        <arg name="max_velocity_lin" value="1.0" />
+        <arg name="max_velocity_rot" value="6" />
+        <arg name="max_velocity_lin" value="2" />
 
         <arg name="tf_base_frame" value="map" />
-        <arg name="tf_child_frame" value="laser" />
+        <arg name="tf_child_frame" value="laser_new" />
         <arg name="tf_odom_frame" value="base_footprint" />
-        <arg name="tf_footprint_frame" value="base_footprint_slam" />
+        <arg name="tf_footprint_frame" value="base_footprint_slam_new" />
 
         <arg name="loop_rate" value="100.0" />
         <arg name="map_topic" value="map" />    <!-- topic of occupancy grid -->
@@ -57,7 +61,7 @@
         <arg name="laser_topic" value="filtered_scan" />    <!-- topic to receive laser scan -->
         <arg name="get_map_topic" value="map" />
 
-        <arg name="use_odom_rescue" value="false" />
+        <arg name="use_odom_rescue" value="true" />
     </include>
 
 </launch>
