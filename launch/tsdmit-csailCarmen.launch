@@ -6,16 +6,16 @@
          <arg name="y_offset" value="0.0"/>
          <arg name="yaw_offset" value="0.0"/>
          
-         <arg name="map_size" value="11"/>
+         <arg name="map_size" value="12"/>
          <arg name="cellsize" value="0.030"/>
-         <arg name="truncation_radius" value="2"/>
+         <arg name="truncation_radius" value="5"/>
          
          <arg name="min_range" value="0.0"/>
          <arg name="max_range" value="30.0"/>
 
          <arg name="object_inflation_factor" value="1"/>
 
-         <arg name="registration_mode" value="1"/>
+         <arg name="registration_mode" value="3"/>
          <arg name="icp_iterations" value="30"/>
 
          <arg name="reg_trs_max" value="1.0"/>
@@ -29,7 +29,7 @@
 <!--	<remap from="pose" to="slam_out_pose"/>   -->
   </node>
 
-  <node pkg="carmen_publisher" type="carmen_publisher" name="carmenPublisher" args="$(find carmen_publisher)/bags/slamBenchmarking/mit-csail_.clf"/>
+  <node pkg="carmen_publisher" type="carmen_publisher" name="carmenPublisher" args="$(find carmen_publisher)/bags/slamBenchmarking/mit-csail_.clf 50"/>
 
   <node pkg="rviz" type="rviz" name="rviz"/>
 

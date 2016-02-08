@@ -27,8 +27,7 @@
 
     <arg name="reg_trs_max" default="1.0" />
     <arg name="reg_sin_rot_max" default="0.5" />
-    <arg name="max_velocity_rot" default="6.28" />
-    <arg name="max_velocity_lin" default="1.0" />
+
 
     <arg name="trials" default="30" />
     <arg name="sizeControlSet" default="360" />
@@ -39,6 +38,8 @@
     <arg name="tf_footprint_frame" default="base_footprint" />
 
     <arg name="use_odom_rescue" default="false" />
+    <arg name="max_velocity_rot" default="6.28" />
+    <arg name="max_velocity_lin" default="1.0" />
 
     <!-- ******************* -->
 

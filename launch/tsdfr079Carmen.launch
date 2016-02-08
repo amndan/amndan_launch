@@ -29,7 +29,7 @@
 <!--	<remap from="pose" to="slam_out_pose"/>   -->
   </node>
 
-  <node pkg="carmen_publisher" type="carmen_publisher" name="carmenPublisher" args="$(find carmen_publisher)/bags/slamBenchmarking/fr079_.clf"/>
+  <node pkg="carmen_publisher" type="carmen_publisher" name="carmenPublisher" args="$(find carmen_publisher)/bags/slamBenchmarking/fr079_.clf 40"/>
 
   <node pkg="rviz" type="rviz" name="rviz"/>
 
